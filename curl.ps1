@@ -1,5 +1,6 @@
 param (
-    [Parameter(Mandatory)][string]$URL
+    [Parameter(Mandatory)][string]$URL,
+    [string]$TLSMax = '1.3'
 )
 
 $keys =
@@ -9,7 +10,7 @@ $keys =
     'starttransfer',
     'total'
 $options = ($keys | ForEach-Object { "%{time_$($_)}" }) -join ' '
-[double[]]$times = (curl -o NUL -w $options $URL) -split ' '
+[double[]]$times = (curl -o NUL -w $options --tls-max $TLSMax $URL || &{ exit }) -split ' '
 
 ''
 '{0,-15} {1,10} {2,10}' -f 'event', 'time', 'delta'
