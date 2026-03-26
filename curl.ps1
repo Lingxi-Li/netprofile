@@ -25,7 +25,7 @@ foreach ($i in 0..($keys.Length - 1)) {
 '{0,-18} {1,18:N0}' -f 'throughput (K/s)', ($out[1] / 1KB)
 
 # start                                        round-trip count
-#   ├─ DNS lookup      %{time_namelookup}      1
+#   ├─ DNS lookup      %{time_namelookup}
 #   ├─ TCP connect     %{time_connect}         1
 #   ├─ TLS connect     %{time_appconnect}      2/1 (TLS 1.2/1.3)
 #   ├─ first byte in   %{time_starttransfer}   1
