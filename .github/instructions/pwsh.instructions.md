@@ -5,3 +5,4 @@ applyTo: '**/*.ps1'
 ---
 - Assume Powershell 7 on Windows 11.
 - Prefer the `foreach ($i in 0..$n)` style for readability.
+- Prefer `$null = ...` style for discarding output.
