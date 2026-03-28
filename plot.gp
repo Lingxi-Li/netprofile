@@ -5,5 +5,7 @@ set autoscale fix
 set offsets graph 0.05, graph 0.05, graph 0.05, graph 0.05
 
 list = ARG1
-p for [ts in list] \
-  ts u 1:2 w lp t ts, '' u 1:2:2 w labels off 0,1 not
+plot for [ts in list] \
+  ts using 1:2 with lines title ts
+
+# '' using 1:2:2 with labels offset 0,1 notitle
