@@ -13,6 +13,7 @@ $retransr = $json.end.sum_sent.retransmits / ($json.end.sum_received.bytes / 1MB
 '# timestamp    {0}'     -f $time
 '# sndbuf       {0:N0}K' -f ($json.start.sndbuf_actual / 1KB)
 '# rcvbuf       {0:N0}K' -f ($json.start.rcvbuf_actual / 1KB)
+'# received     {0:N0}M' -f ($json.end.sum_received.bytes / 1MB)
 '# throughput   {0:N1}M' -f ($json.end.sum_received.bits_per_second / 8 / 1MB)
 '# active       {0:P0}'  -f $activer
 '# sent/recv    {0:P0}'  -f $efficiency
