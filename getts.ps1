@@ -3,7 +3,7 @@ param (
 )
 
 $json = Get-Content $Path -Raw | ConvertFrom-Json
-if (-not $json.intervals.Length) { return }
+if ($json.error) { return Write-Error $json.error }
 
 $time = [DateTimeOffset]::Parse($json.start.timestamp.time).ToOffset([TimeSpan]::FromHours(8)).ToString('HHmm')
 $activer = ($json.intervals | Where-Object { $_.sum.bytes -gt 0 }).Count / $json.intervals.Length
