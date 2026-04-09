@@ -10,9 +10,16 @@ function FetchInfo {
 	param(
 		[string][Parameter(Mandatory)]$Ip
 	)
-    $info = Invoke-RestMethod "http://ipinfo.io/$Ip" -TimeoutSec 5
-	if ($info.bogon) { return 'LAN' }
-    "$($info.country), $($info.city), $($info.org ?? 'Unknown ISP')"
+    # $info = Invoke-RestMethod "http://ipinfo.io/$Ip" -TimeoutSec 5
+	# if ($info.bogon) { return 'LAN' }
+    # "$($info.country), $($info.city), $($info.org ?? 'Unknown ISP')"
+	$info = Invoke-RestMethod "http://ipwho.is/$Ip" -TimeoutSec 5
+	if (-not $info.success) { return $info.message -eq 'Reserved range' ? '--' : $info.message }
+	$conn = $info.connection
+	'{0} AS{1},  {2}' -f `
+		$info.country_code,
+		($conn.asn -ne 0 ? $conn.asn : '----'),
+		$conn.org
 }
 
 function ProcessLine {
